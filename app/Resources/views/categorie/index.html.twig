@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+{% block title %}Categorie{% endblock %}
+{% block body %}
+    <h1>List des Categories</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Parent</th>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Lien</th>
+                <th>Icon</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for categorie in categories %}
+            <tr>
+                <td><a href="{{ path('categorie_show', { 'id': categorie.id }) }}">{{ categorie.id }}</a></td>
+                <td>{{ categorie.parent }}</td>
+                <td>{{ categorie.title }}</td>
+                <td>{{ categorie.description }}</td>
+                <td>{{ categorie.link }}</td>
+                <td>{{ categorie.icon }}</td>
+                <td>
+                    <a href="{{ path('categorie_show', { 'id': categorie.id }) }}">Afficher</a>
+                    <a href="{{ path('categorie_edit', { 'id': categorie.id }) }}">Modifier</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('categorie_new') }}">Nouvelle catégorie</a>
+    <a href="{{ path('homepage') }}">Retour</a>
+
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+{% block title %}Utilisateur{% endblock %}
+{% block body %}
+    <h1>Liste des utilisateurs</h1>
+    {% if app.session.flashBag.has('info') %}
+        <div class="alert alert-success alert-dismissible fade in" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+            {% for msg in app.session.flashBag.get('info') %}
+                {{ msg }}
+            {% endfor %}
+        </div>
+    {% endif %}
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Utilisateur</th>
+                <th>Dernière connexion</th>
+                <th>Actif</th>
+                <th>Role</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td><a href="{{ path('user_show', { 'id': user.id }) }}">{{ user.id }}</a></td>
+                <td>{{ user.username }}</td>
+                <td>{% if user.lastLogin %}{{ user.lastLogin|date('d/m/Y') }}{% endif %}</td>
+                <td>{% if user.enabled %} 1 {% else %} 0 {% endif %}</td>
+                <td>
+                    {% for role in user.roles %}
+                        {{ role }}
+                    {% endfor %}
+                </td>
+                <td>
+                    <a href="{{ path('user_show', { 'id': user.id }) }}">Afficher</a>
+                    <a href="{{ path('user_edit', { 'id': user.id }) }}">Modifier</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('user_new') }}">Ajouter un utilisateur</a>
+    <a href="{{ path('homepage') }}">Retour</a>
+    <a href="{{ path('fos_user_security_logout') }}">Deconnexion</a>
+{% endblock %}

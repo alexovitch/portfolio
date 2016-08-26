@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Error{% endblock %}
+{% block body %}
+    <div class="row">
+
+        <div class="span12">
+
+            <div class="error-container">
+                <h1>404</h1>
+
+                <h2>NON ! Vous n'avez pas le droit d'acceder à cette page</h2>
+
+                <div class="error-details">
+                    Désolé, une erreur est apparue! Pourquoi ne pas revenir en arrière ou réessayer!
+
+                </div> <!-- /error-details -->
+
+                <div class="error-actions">
+                    <a href="{{ path('homepage') }}" class="btn btn-large btn-primary">
+                        <i class="icon-chevron-left"></i>
+                        &nbsp;
+                        Retour à l'accueil
+                    </a>
+
+
+
+                </div> <!-- /error-actions -->
+
+            </div> <!-- /error-container -->
+
+        </div> <!-- /span12 -->
+
+    </div> <!-- /row -->
+
+{% endblock %}

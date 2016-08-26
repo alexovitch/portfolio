@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Utilisateur : {{ user.username }}</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ user.id }}</td>
+                <td>{{ user.username }}</td>
+                <td>                    {% for role in user.roles %}
+                        {{ role }}
+                    {% endfor %}</td>
+                <td>{% if user.lastLogin %}{{ user.lastLogin|date('d/m/Y') }}{% endif %}</td>
+                <td>{% if user.enabled %} 1 {% else %} 0 {% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <a href="{{ path('user_edit', { 'id': user.id }) }}">Modifier</a>
+
+    {{ form_start(delete_form) }}
+    <input type="submit" value="Supprimer">
+    {{ form_end(delete_form) }}
+
+    <a href="{{ path('user_index') }}">Retour</a>
+{% endblock %}
