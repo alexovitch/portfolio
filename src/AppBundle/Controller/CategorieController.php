@@ -98,7 +98,9 @@ class CategorieController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $categorie->getImage()->upload();
+            if ($categorie->getImage()) {
+            	$categorie->getImage()->upload();
+            }
             $em = $this->getDoctrine()->getManager();
             $em->persist($categorie);
             $em->flush();
